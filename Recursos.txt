@@ -1,0 +1,119 @@
+    <nav>
+        <ul>
+                <li><a title="Ferreteria"></a></li>
+                
+        </ul>
+        
+    </nav>
+
+
+<!DOCTYPE>: Se utiliza para especificar la versión de HTML que se está utilizando en la página.
+
+<html>: Define el inicio y el final de la página web.
+
+<head>: Define la sección de encabezado de la página, donde se incluyen elementos como el título de la página, metaetiquetas, scripts, entre otros.
+
+<title>: Define el título de la página web que aparece en la pestaña del navegador.
+
+<body>: Define la sección del cuerpo de la página web, donde se incluyen todos los elementos que se mostrarán en la página.
+
+<h1> a <h6>: Define los encabezados o títulos de diferentes niveles de jerarquía en la página web. El uso de esta etiqueta formateará cualquier texto entre la etiqueta <h> de apertura y la etiqueta </h> de cierre como un Título o subtítulo. Por ejemplo, en <h>Etiqueta de encabezamiento</h2>, <h2> y </h2> serían las etiquetas HTML y "Etiqueta de encabezamiento" es el elemento HTML, es decir, el encabezamiento de la página. 
+
+<a>: Define un enlace que el usuario puede hacer clic para ir a otra página web o a una sección diferente de la misma página.
+
+<img>: Define una imagen que se mostrará en la página web.
+
+<p>Etiqueta de párrafo</p>: Define un párrafo de texto. Las etiquetas <p> y </p> son etiquetas HTML y la "Etiqueta de párrafo" es 
+el elemento HTML, es decir, el texto de la página. Esta etiqueta formatea cualquier texto entre la etiqueta <p> de apertura y 
+la etiqueta </p> de cierre como un párrafo estándar o texto de cuerpo principal.
+
+<b>Etiqueta de negrita</b>: Esta etiqueta dará formato de negrita a cualquier texto que se encuentre entre la etiqueta <b> de apertura 
+y la etiqueta </b> de cierre. Aquí, <b> y </b> son las etiquetas HTML y la "etiqueta de negrita" es el elemento HTML, es decir, el texto de la página. 
+
+<i>Etiqueta de cursiva</i>: Esta etiqueta formateará como cursiva cualquier texto entre la etiqueta de apertura <i> y 
+la etiqueta de cierre </i>. Aquí, <i> y </i> son las etiquetas HTML y "Etiqueta cursiva" es el elemento HTML (el texto de la página).
+<u>Etiqueta de subrayado</u>: Esta etiqueta formateará cualquier texto entre la etiqueta <u> de apertura y la etiqueta </u> de cierre 
+como subrayado. Aquí, <u> y </u> son las etiquetas HTML y "Etiqueta de subrayado" es el elemento HTML, es decir, el texto de la página. 
+
+<ul> en HTML (Unordered List) crea listas desordenadas, mostrando elementos con viñetas por defecto. Es un elemento de bloque utilizado 
+para agrupar elementos relacionados sin un orden específico, como listas de compras, enlaces en menús o características.
+
+La etiqueta HTML <nav> define una sección de enlaces de navegación principales en una página web, 
+como menús o tablas de contenido, indicando a navegadores y lectores de pantalla que ese contenido 
+está diseñado para moverse por el sitio o hacia otros documentos, mejorando la accesibilidad y la semántica del código. 
+No todos los enlaces deben ir dentro de <nav>, solo los bloques principales, y puede usarse dentro de <header>
+
+La etiqueta <li> define un elemento de lista . Se utiliza en listas ordenadas (<ol>), desordenadas (<ul>) y en listas de menú (<menu>). En <ul> y <menu>, 
+los elementos de lista suelen mostrarse con viñetas
+
+La etiqueta <header> en HTML5 es un elemento semántico para contenido introductorio o de navegación, como el logotipo, títulos (<h1>-<h6>) y menús de navegación,
+mejorando la estructura y accesibilidad de una página, y puede usarse en cualquier sección, no solo al principio del documento. Contiene información clave
+y va dentro del <body>,
+
+width=device-width: Le dice a la página que el ancho del sitio debe ser igual al ancho de la pantalla 
+del dispositivo (ya sea un monitor, un iPhone o una tablet).
+
+initial-scale=1.0: Define el nivel de zoom inicial cuando se carga la página por primera vez 
+(zoom normal al 100%).
+
+Las etiquetas <meta> siempre van dentro de la sección <head> de tu HTML. Es lo primero que 
+lee la computadora.
+
+META Sirven para definir cómo se debe comportar la página antes de que el usuario vea el primer píxel.
+
+charset="UTF-8": Es el traductor. Le dice al navegador: "Usa el estándar universal de letras". Sin esto, 
+símbolos como la ñ o los acentos de tu ferretería se romperían.
+
+name="viewport": Es el sastre. Ajusta el tamaño de la página al ancho de la pantalla del dispositivo. 
+Es lo que hace que tu página no se vea como una hormiga en un celular.
+
+name="description": Es el resumen. Es el texto que aparece debajo del título cuando alguien busca tu 
+página en Google. Ayuda a que la gente haga clic.
+
+1. class="main-header"
+Esta clase se usa para identificar el encabezado principal de tu sitio.
+
+Su función: Sirve para que en tu CSS puedas decir: "Quiero que el fondo sea gris, que esté fijo arriba 
+y que tenga una sombra".
+
+Por qué no usar solo header: Porque podrías tener otros headers más pequeños dentro de un artículo, y 
+con main-header te aseguras de afectar solo al de arriba del todo.
+
+2. class="container"
+Este es uno de los nombres más usados en el diseño web.
+
+Su función: Sirve para centrar el contenido y evitar que los textos toquen los bordes de la pantalla.
+
+Cómo funciona en el CSS: Normalmente le das un ancho máximo (por ejemplo 1100px) y usas margin: 0 auto;.
+Esto hace que tu contenido se vea organizado en medio de la pantalla y no estirado de lado a lado.
+
+2. La clase class="hero"
+En el mundo del diseño web, el término "Hero" se refiere a la primera sección que ve un usuario al entrar a un sitio (normalmente debajo del menú).
+
+¿Qué contiene?: Suele tener un título grande (<h1>), un mensaje llamativo y, a veces, un botón de acción (como "Comprar ahora").
+
+Su objetivo: Es el "gancho". Debe decir claramente de qué trata tu ferretería en menos de 3 segundos.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

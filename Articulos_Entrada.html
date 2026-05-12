@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario - FERRETERÍA LOPEZ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container-nav">
+            <h1>FERRETERÍA</h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="Index.html">Menu-Principal</a></li>
+                    <li><a href="Articulos_Venta.html">Articulos-Ventas</a></li>
+                    <li><a href="Caracteristicas_Productos.html">Caracteristicas_Productos</a></li>
+                    <li><a href="Precios.html">Precios-Articulos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="inventory-page">
+        <section class="hero-section">
+            <h1>GESTIÓN DE INVENTARIO</h1>
+            <p>Entrada y control de stock de artículos</p>
+        </section>
+
+        <div class="inventory-container">
+            
+            <div class="card-3d form-container">
+                <h2 id="form-title">Agregar Nuevo Artículo</h2>
+                <form id="inventory-form">
+                    <input type="hidden" id="edit-index">
+                    <div class="input-group">
+                        <label>Nombre del Producto</label>
+                        <input type="text" id="prod-name" placeholder="Ej. Taladro Bosch" required>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Precio</label>
+                            <input type="number" id="prod-price" step="0.01" placeholder="0.00" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Stock Inicial</label>
+                            <input type="number" id="prod-stock" placeholder="0" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-buy" id="btn-submit">GUARDAR ARTÍCULO</button>
+                    <button type="button" class="btn-cart" id="btn-cancel" style="display:none;">CANCELAR</button>
+                </form>
+            </div>
+
+            <div class="card-3d table-container">
+                <h2>Artículos en Existencia</h2>
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-table-body">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let inventory = [
+            { name: "Martillo de Uña", price: 15.50, stock: 25 },
+            { name: "Taladro Percutor", price: 85.00, stock: 10 }
+        ];
+
+        const form = document.getElementById('inventory-form');
+        const tableBody = document.getElementById('inventory-table-body');
+        const btnSubmit = document.getElementById('btn-submit');
+        const btnCancel = document.getElementById('btn-cancel');
+        const formTitle = document.getElementById('form-title');
+
+        function renderTable() {
+            tableBody.innerHTML = '';
+            inventory.forEach((item, index) => {
+                tableBody.innerHTML += `
+                    <tr>
+                        <td>#${index + 1}</td>
+                        <td>${item.name}</td>
+                        <td>$${item.price.toFixed(2)}</td>
+                        <td>${item.stock}</td>
+                        <td>
+                            <button class="action-btn edit" onclick="editItem(${index})">✎</button>
+                            <button class="action-btn delete" onclick="deleteItem(${index})">🗑</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        form.onsubmit = (e) => {
+            e.preventDefault();
+            const index = document.getElementById('edit-index').value;
+            const newItem = {
+                name: document.getElementById('prod-name').value,
+                price: parseFloat(document.getElementById('prod-price').value),
+                stock: parseInt(document.getElementById('prod-stock').value)
+            };
+
+            if (index === "") {
+                inventory.push(newItem);
+            } else {
+                inventory[index] = newItem;
+                resetForm();
+            }
+            renderTable();
+            form.reset();
+        };
+
+        function deleteItem(index) {
+            if(confirm('¿Seguro que deseas eliminar este artículo?')) {
+                inventory.splice(index, 1);
+                renderTable();
+            }
+        }
+
+        function editItem(index) {
+            const item = inventory[index];
+            document.getElementById('prod-name').value = item.name;
+            document.getElementById('prod-price').value = item.price;
+            document.getElementById('prod-stock').value = item.stock;
+            document.getElementById('edit-index').value = index;
+            
+            formTitle.innerText = "Modificar Artículo";
+            btnSubmit.innerText = "ACTUALIZAR CAMBIOS";
+            btnCancel.style.display = "inline-block";
+        }
+
+        function resetForm() {
+            document.getElementById('edit-index').value = "";
+            formTitle.innerText = "Agregar Nuevo Artículo";
+            btnSubmit.innerText = "GUARDAR ARTÍCULO";
+            btnCancel.style.display = "none";
+            form.reset();
+        }
+
+        btnCancel.onclick = resetForm;
+        renderTable();
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+

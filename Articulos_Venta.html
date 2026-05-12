@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventas e IA - FERRETERÍA LOPEZ</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos específicos para integrar la IA sin romper style.css */
+        .chat-page-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 140px 20px 50px; /* Margen para el header fijo */
+            min-height: 100vh;
+        }
+
+        #chat {
+            width: 100%;
+            max-width: 450px;
+            height: 600px;
+            background: #fff;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            border: 2px solid #333;
+        }
+
+        #header-chat {
+            background: #333;
+            color: #F37021; /* Naranja Ferretería */
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-bottom: 3px solid #F37021;
+        }
+
+        #mensajes {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f9f9f9;
+            color: #333;
+        }
+
+        .msg {
+            padding: 10px 14px;
+            margin: 8px 0;
+            border-radius: 15px;
+            max-width: 80%;
+            font-size: 14px;
+            line-height: 1.4;
+            animation: fade .3s;
+        }
+
+        .user { 
+            background: #F37021; 
+            color: #fff; 
+            margin-left: auto; 
+            border-bottom-right-radius: 2px;
+        }
+
+        .bot { 
+            background: #e5e7eb; 
+            color: #333; 
+            border-bottom-left-radius: 2px;
+        }
+
+        @keyframes fade { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; } }
+
+        #input-area {
+            display: flex;
+            border-top: 1px solid #ddd;
+            background: #fff;
+        }
+
+        #entrada {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            outline: none;
+        }
+
+        #btn-enviar {
+            background: #F37021;
+            border: none;
+            color: #fff;
+            padding: 0 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .sugerencias {
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            background: #eee;
+            border-top: 1px solid #ddd;
+        }
+
+        .sugerencias span {
+            background: #333;
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: 0.3s;
+        }
+
+        .sugerencias span:hover {
+            background: #F37021;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container-nav">
+            <h1>FERRETERÍA</h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="Index.html">Menu-Principal</a></li>
+                    <li><a href="Articulos_Entrada.html">Artículos-Existentes</a></li>
+                    <li><a href="Caracteristicas_Productos.html">Caracteristicas_Productos</a></li>
+                    <li><a href="Precios.html">Precios-Articulos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="chat-page-container">
+        <div id="chat">
+            <div id="header-chat">🛠️ ASISTENTE LOPEZ AI</div>
+
+            <div id="mensajes">
+                <div class="msg bot">¡Hola! Soy tu asistente virtual. ¿En qué puedo ayudarte hoy? Prueba escribiendo "productos" o "donde estamos".</div>
+            </div>
+
+            <div class="sugerencias">
+                <span onclick="quick('productos')">Ver Productos</span>
+                <span onclick="quick('carrito')">Mi Carrito</span>
+                <span onclick="quick('horario')">Horario</span>
+                <span onclick="quick('donde')">Ubicación</span>
+            </div>
+
+            <div id="input-area">
+                <input id="entrada" placeholder="Escribe tu duda aquí...">
+                <button id="btn-enviar" onclick="responder()">ENVIAR</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const catalogo = {
+            martillo: { precio: 120, sinonimos: ["golpear", "uñas"] },
+            clavos: { precio: 20, sinonimos: ["clavo", "puntilla"] },
+            taladro: { precio: 850, sinonimos: ["perforar", "agujero"] },
+            cemento: { precio: 220, sinonimos: ["construccion", "obra"] },
+            pintura: { precio: 150, sinonimos: ["pintar", "color"] },
+            destornillador: { precio: 90, sinonimos: ["atornillar", "pala", "cruz"] },
+            sierra: { precio: 300, sinonimos: ["cortar", "madera"] },
+            llave: { precio: 110, sinonimos: ["ajustar", "tuerca"] },
+            pegamento: { precio: 60, sinonimos: ["pegar", "pvc"] },
+            tuberia: { precio: 200, sinonimos: ["agua", "tubo"] }
+        };
+
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || {};
+        const entrada = document.getElementById("entrada");
+        const mensajes = document.getElementById("mensajes");
+
+        function limpiar(t) {
+            return t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        }
+
+        function msg(texto, tipo) {
+            let d = document.createElement("div");
+            d.className = "msg " + tipo;
+            d.innerText = texto;
+            mensajes.appendChild(d);
+            mensajes.scrollTop = mensajes.scrollHeight;
+        }
+
+        function guardar() {
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+        }
+
+        function quick(t) {
+            entrada.value = t;
+            responder();
+        }
+
+        function detectarProducto(input) {
+            for (let p in catalogo) {
+                if (input.includes(p)) return p;
+                for (let s of catalogo[p].sinonimos) {
+                    if (input.includes(s)) return p;
+                }
+            }
+            return null;
+        }
+
+        function responder() {
+            let original = entrada.value;
+            let input = limpiar(original);
+            if (!input) return;
+
+            msg(original, "user");
+
+            setTimeout(() => {
+                let r = "🤔 No entendí bien. Prueba con 'productos', 'carrito' o preguntarme por el 'horario'.";
+                let producto = detectarProducto(input);
+
+                if (input.includes("hola")) {
+                    r = "👋 ¡Hola! Bienvenido a Ferretería Lopez. ¿Buscas alguna herramienta en específico?";
+                } 
+                else if (input.includes("productos")) {
+                    r = "🛠️ Catálogo disponible:\n\n";
+                    for (let p in catalogo) {
+                        r += `• ${p.toUpperCase()} - $${catalogo[p].precio}\n`;
+                    }
+                } 
+                else if (input.includes("comprar") && producto) {
+                    carrito[producto] = (carrito[producto] || 0) + 1;
+                    guardar();
+                    r = `🛒 ¡Excelente elección! Agregaste ${producto} al carrito.`;
+                } 
+                else if (input.includes("carrito")) {
+                    if (Object.keys(carrito).length === 0) {
+                        r = "🛒 Tu carrito está vacío actualmente.";
+                    } else {
+                        let total = 0;
+                        r = "🛒 Tu Carrito:\n\n";
+                        for (let p in carrito) {
+                            let sub = carrito[p] * catalogo[p].precio;
+                            total += sub;
+                            r += `${p} x${carrito[p]} = $${sub}\n`;
+                        }
+                        r += `\n💰 TOTAL A PAGAR: $${total}`;
+                    }
+                } 
+                else if (input.includes("quitar") && producto) {
+                    delete carrito[producto];
+                    guardar();
+                    r = `❌ Se ha eliminado ${producto} del carrito.`;
+                } 
+                else if (input.includes("pagar")) {
+                    let total = 0;
+                    for (let p in carrito) { total += carrito[p] * catalogo[p].precio; }
+                    if(total > 0) {
+                        carrito = {};
+                        guardar();
+                        r = `🧾 ¡Compra procesada con éxito!\nTotal: $${total}\n¡Gracias por preferir Ferretería Lopez!`;
+                    } else {
+                        r = "El carrito está vacío, no hay nada que pagar.";
+                    }
+                } 
+                else if (producto) {
+                    r = `💲 El precio de ${producto} es de $${catalogo[producto].precio}. ¿Deseas comprarlo?`;
+                } 
+                else if (input.includes("horario")) {
+                    r = "🕒 Atendemos de Lunes a Sábado: 8:00 AM - 7:00 PM.";
+                } 
+                else if (input.includes("donde") || input.includes("ubicacion")) {
+                    r = "📍 Nos ubicamos en el centro de Puebla, México. ¡Te esperamos!";
+                } 
+                else if (input.includes("gracias")) {
+                    r = "😊 ¡De nada! Estamos para servirte.";
+                }
+
+                msg(r, "bot");
+            }, 600);
+
+            entrada.value = "";
+        }
+
+        entrada.addEventListener("keypress", e => {
+            if (e.key === "Enter") responder();
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+

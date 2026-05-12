@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferretería - Precios</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container-nav">
+            <h1>FERRETERÍA</h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="Index.html">Menu-Principal</a></li>
+                    <li><a href="Articulos_Entrada.html">Artículos-Existentes</a></li>
+                    <li><a href="Articulos_Venta.html">Articulos-Ventas</a></li>
+                    <li><a href="Caracteristicas_Productos.html">Caracteristicas_Productos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="precios-page">
+        <h2 class="section-title">CATEGORÍAS DE PRECIOS</h2>
+        
+        <div class="price-container">
+            <div class="card-3d">
+                <button class="card-header" onclick="toggleList('muy-caros')">
+                    MUY CAROS (Gama Alta)
+                </button>
+                <div id="muy-caros" class="card-content">
+                    <ul>
+                        <li>Generador Eléctrico Industrial</li>
+                        <li>Soldadora Inverter Profesional</li>
+                        <li>Compresor de Aire 100L</li>
+                        <li>Sierra de Banco Profesional</li>
+                        <li>Rotomartillo Demoledor</li>
+                        <li>Torno para Metal</li>
+                        <li>Hidrolavadora Industrial</li>
+                        <li>Andamio Plegable Reforzado</li>
+                        <li>Nivel Láser Rotativo 360</li>
+                        <li>Kit de Herramientas Inalámbricas Pro</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card-3d">
+                <button class="card-header" onclick="toggleList('caros')">
+                    CAROS (Calidad Premium)
+                </button>
+                <div id="caros" class="card-content">
+                    <ul>
+                        <li>Taladro Percutor Bosch</li>
+                        <li>Esmeril Angular 9"</li>
+                        <li>Sierra Circular Makita</li>
+                        <li>Juego de Llaves de Carraca</li>
+                        <li>Pistola de Pintar Eléctrica</li>
+                        <li>Cortadora de Azulejos Pro</li>
+                        <li>Aspiradora Seco/Mojado</li>
+                        <li>Caja de Herramientas de Acero</li>
+                        <li>Escalera Telescópica 4m</li>
+                        <li>Pulidora Orbital</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card-3d">
+                <button class="card-header" onclick="toggleList('regulares')">
+                    REGULARES (Uso Hogar)
+                </button>
+                <div id="regulares" class="card-content">
+                    <ul>
+                        <li>Taladro Inalámbrico 12V</li>
+                        <li>Juego de Destornilladores (20 pzas)</li>
+                        <li>Martillo de Uña Stanley</li>
+                        <li>Lijadora de Palma</li>
+                        <li>Llave Inglesa Grande</li>
+                        <li>Nivel de Burbuja Magnético</li>
+                        <li>Cinta Métrica 8m</li>
+                        <li>Arco de Segueta con Repuestos</li>
+                        <li>Linterna LED Recargable</li>
+                        <li>Pistola de Silicona Caliente</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card-3d">
+                <button class="card-header" onclick="toggleList('baratos')">
+                    BARATOS (Consumibles)
+                </button>
+                <div id="baratos" class="card-content">
+                    <ul>
+                        <li>Cinta Teflón</li>
+                        <li>Paquete de Lijas Varias</li>
+                        <li>Brocas para Concreto (Juego)</li>
+                        <li>Guantes de Nitrilo</li>
+                        <li>Lentes de Seguridad</li>
+                        <li>Pack de Clavos y Tornillos</li>
+                        <li>Pegamento de Contacto</li>
+                        <li>Espátula de Plástico</li>
+                        <li>Brocha de 2 Pulgadas</li>
+                        <li>Cúter Profesional</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleList(id) {
+            const element = document.getElementById(id);
+            // Cerramos otros por si están abiertos (opcional)
+            document.querySelectorAll('.card-content').forEach(el => {
+                if (el.id !== id) el.style.display = 'none';
+            });
+
+            // Abrimos o cerramos el seleccionado
+            if (element.style.display === "block") {
+                element.style.display = "none";
+            } else {
+                element.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+

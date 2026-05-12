@@ -1,0 +1,543 @@
+/* 1. Configuración General */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background-image: url('IMG/fondo2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+/* 2. Barra de Navegación */
+header {
+    background-color: #333333;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* Color naranja para el título principal */
+.container-nav h1 {
+    color: #F37021; /*  (puedes usar 'orange' o un código hexadecimal) */
+    font-size: 32px; /* Ajusta el tamaño si lo deseas */
+    letter-spacing: 2px; /* Opcional: le da un toque más profesional */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Sombra para que resalte más */
+}
+
+.container-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+}
+
+/* Esto centra el contenido y lo pone en columna */
+.container-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    width: 100%;
+}
+
+/* Esto cambia el color de FERRETERÍA a Naranja en todas las páginas */
+.container-nav h1 {
+    color: #F37021; /* Naranja tipo herramienta */
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Asegura que la lista del menú esté centrada */
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Espacio entre botones */
+    padding: 0;
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #4CAF50; /* Un verde más vibrante para el hover */
+}
+
+/* 3. Contenedor de contenido */
+main {
+    padding-top: 140px; /* Espacio para que el header fijo no tape el título */
+    text-align: center;
+    color: #ffffff;
+}
+
+.hero-section {
+    margin-bottom: 30px;
+}
+
+h1, p {
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+}
+
+/*================ 4. ESTILOS DEL CARRUSEL ==================*/
+.carousel-container {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto 50px auto;
+    overflow: hidden; /* CRUCIAL: Oculta las fotos que están fuera de vista */
+    border: 4px solid #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.8);
+}
+
+.carousel-slide {
+    display: flex; /* Alinea las imágenes horizontalmente */
+    width: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-slide img {
+    width: 100%;      /* Ancho relativo al contenedor */
+    min-width: 100%;  /* FUERZA a que cada imagen sea del ancho total */
+    height: 500px; 
+    object-fit: cover; /* Evita que la imagen se estire feo */
+    flex-shrink: 0;   /* Evita que flexbox intente comprimirlas */
+}
+
+/* Botones de navegación */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 10;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.carousel-btn:hover {
+    background: #4CAF50;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+/*================ 4. ESTILOS DE PRECIOS RECUADROS  ==================*/
+
+/* Estilos para la página de Precios */
+.precios-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+
+.section-title {
+    margin-bottom: 30px;
+    color: #FF8C00;
+}
+
+.price-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* El Recuadro 3D */
+.card-3d {
+    background: #444;
+    border-radius: 8px;
+    border-bottom: 5px solid #222; /* Efecto de grosor 3D */
+    transition: transform 0.2s, border-bottom 0.2s;
+    overflow: hidden;
+}
+
+.card-3d:hover {
+    transform: translateY(-3px);
+    border-bottom: 8px solid #222;
+}
+
+.card-3d:active {
+    transform: translateY(2px);
+    border-bottom: 2px solid #222;
+}
+
+/* Encabezado del botón */
+.card-header {
+    width: 100%;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    transition: background 0.3s;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-header:after {
+    content: '▼';
+    font-size: 12px;
+}
+
+.card-header:hover {
+    background-color: #F37021; /* Naranja al pasar el mouse */
+}
+
+/* Contenido de la lista */
+.card-content {
+    display: none; /* Escondido por defecto */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #333;
+    text-align: left;
+    animation: slideDown 0.4s ease-out;
+}
+
+.card-content ul {
+    list-style: none;
+}
+
+.card-content li {
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+    font-weight: 500;
+}
+
+.card-content li:last-child {
+    border-bottom: none;
+}
+
+/* Animación de apertura */
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/*================ 5. ESTILOS DE REDES SOCIALES 3D ==================*/
+
+.social-section {
+    padding: 40px 20px;
+    margin-bottom: 60px;
+}
+
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.social-card {
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+
+/* Reutilizamos parte de tu clase card-3d pero ajustada a redes */
+.card-content-social {
+    padding: 30px;
+    text-align: center;
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    transition: background 0.3s;
+}
+
+/* Colores personalizados por red al pasar el mouse */
+.social-card:nth-child(1):hover .card-content-social { background-color: #25D366; } /* WhatsApp */
+.social-card:nth-child(2):hover .card-content-social { background-color: #1877F2; } /* Facebook */
+.social-card:nth-child(3):hover .card-content-social { background-color: #E4405F; } /* Instagram */
+.social-card:nth-child(4):hover .card-content-social { background-color: #F37021; } /* Correo (Naranja Ferretería) */
+
+.social-card span {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+
+/*================ 6. ESTILOS DE LA PÁGINA DE PRODUCTOS ==================*/
+
+.productos-page {
+    padding: 140px 20px 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+    padding: 20px 0;
+}
+
+.product-card {
+    background: #f9f9f9;
+    border-radius: 12px;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-bottom: 6px solid #ccc; /* Efecto 3D base */
+    transition: all 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    border-bottom: 10px solid #F37021;
+}
+
+.product-image {
+    background: #eee;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 8px 8px 0 0;
+}
+
+.img-placeholder {
+    font-size: 50px;
+}
+
+.category-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #F37021;
+    color: white;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.product-info {
+    padding: 15px;
+}
+
+.product-info h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    height: 40px;
+    overflow: hidden;
+    color: #222;
+    text-shadow: none; /* Quitamos la sombra del global para legibilidad */
+}
+
+.price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 15px;
+}
+
+.product-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-cart {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    flex: 1;
+    transition: 0.3s;
+}
+
+.btn-buy {
+    background: #F37021;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    flex: 2;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-cart:hover { background: #555; }
+.btn-buy:hover { background: #e65c00; transform: scale(1.05); }
+
+/*================ 7. ESTILOS DE INVENTARIO (ENTRADAS) ==================*/
+
+.inventory-page {
+    padding: 140px 20px 50px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.inventory-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+/* Formulario */
+.form-container {
+    flex: 1;
+    min-width: 300px;
+    background: #444;
+    padding: 25px;
+    height: fit-content;
+}
+
+.form-container h2 {
+    color: #F37021;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    color: #ddd;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background: #eee;
+}
+
+.input-row {
+    display: flex;
+    gap: 10px;
+}
+
+/* Tabla */
+.table-container {
+    flex: 2;
+    min-width: 500px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    color: #333;
+}
+
+.table-container h2 {
+    margin-bottom: 20px;
+}
+
+.table-scroll {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+
+/* Botones de Acción */
+.action-btn {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.edit { background: #F37021; color: white; }
+.delete { background: #ff4444; color: white; }
+
+.action-btn:hover { opacity: 0.8; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

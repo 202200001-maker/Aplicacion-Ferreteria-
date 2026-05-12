@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - FERRETERÍA LOPEZ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container-nav">
+            <h1>FERRETERÍA</h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="Index.html">Menu-Principal</a></li>
+                    <li><a href="Articulos_Entrada.html">Artículos-Existentes</a></li>
+                    <li><a href="Articulos_Venta.html">Articulos-Ventas</a></li>
+                    <li><a href="Precios.html">Precios-Articulos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="productos-page">
+        <section class="hero-section">
+            <h1>CATÁLOGO DE PRODUCTOS</h1>
+            <p>Las mejores herramientas para tus proyectos</p>
+        </section>
+
+        <div class="productos-grid" id="contenedor-productos">
+            </div>
+    </main>
+
+    <script>
+        const productos = [
+            // Herramientas Manuales
+            { id: 1, nombre: "Martillo de Uña 16oz", precio: 15.50, cat: "Manual" },
+            { id: 2, nombre: "Juego de Destornilladores (6 pzas)", precio: 22.00, cat: "Manual" },
+            { id: 3, nombre: "Llave Inglesa 10\"", precio: 18.75, cat: "Manual" },
+            { id: 4, nombre: "Alicate de Corte Diagonal", precio: 12.30, cat: "Manual" },
+            { id: 5, nombre: "Nivel de Burbuja 24\"", precio: 25.00, cat: "Manual" },
+            { id: 6, nombre: "Flexómetro 5m Pro", precio: 9.99, cat: "Manual" },
+            { id: 7, nombre: "Serrucho para Madera", precio: 14.20, cat: "Manual" },
+            { id: 8, nombre: "Juego de Llaves Allen", precio: 11.50, cat: "Manual" },
+            { id: 9, nombre: "Cutter Profesional", precio: 5.50, cat: "Manual" },
+            { id: 10, nombre: "Prensa de Mano C 4\"", precio: 8.90, cat: "Manual" },
+            
+            // Herramientas Eléctricas
+            { id: 11, nombre: "Taladro Percutor 600W", precio: 85.00, cat: "Eléctrica" },
+            { id: 12, nombre: "Amoladora Angular 4.5\"", precio: 75.00, cat: "Eléctrica" },
+            { id: 13, nombre: "Sierra Circular 1200W", precio: 110.00, cat: "Eléctrica" },
+            { id: 14, nombre: "Lijadora Orbital", precio: 65.40, cat: "Eléctrica" },
+            { id: 15, nombre: "Rotomartillo Industrial", precio: 145.00, cat: "Eléctrica" },
+            { id: 16, nombre: "Atornillador Inalámbrico 12V", precio: 55.00, cat: "Eléctrica" },
+            { id: 17, nombre: "Cepillo Eléctrico Madera", precio: 95.00, cat: "Eléctrica" },
+            { id: 18, nombre: "Pistola de Calor 1800W", precio: 40.00, cat: "Eléctrica" },
+            { id: 19, nombre: "Sierra de Calar 500W", precio: 58.00, cat: "Eléctrica" },
+            { id: 20, nombre: "Soldadora Inverter 160A", precio: 180.00, cat: "Eléctrica" },
+
+            // Construcción y Medición
+            { id: 21, nombre: "Carretilla Reforzada", precio: 65.00, cat: "Construcción" },
+            { id: 22, nombre: "Pala Cuadrada de Acero", precio: 24.50, cat: "Construcción" },
+            { id: 23, nombre: "Pico de Obra 5lb", precio: 28.00, cat: "Construcción" },
+            { id: 24, nombre: "Cuchara de Albañil 8\"", precio: 12.00, cat: "Construcción" },
+            { id: 25, nombre: "Regla de Aluminio 2m", precio: 32.00, cat: "Construcción" },
+            { id: 26, nombre: "Escalera de Tijera 6 peldaños", precio: 89.00, cat: "Construcción" },
+            { id: 27, nombre: "Mezcladora de Pintura", precio: 15.00, cat: "Construcción" },
+            { id: 28, nombre: "Maza de Goma 16oz", precio: 10.50, cat: "Construcción" },
+            { id: 29, nombre: "Cincel Plano para Concreto", precio: 9.00, cat: "Construcción" },
+            { id: 30, nombre: "Casco de Seguridad", precio: 15.00, cat: "Seguridad" },
+
+            // Fontanería y Varios
+            { id: 31, nombre: "Llave Stillson 14\"", precio: 35.00, cat: "Fontanería" },
+            { id: 32, nombre: "Cinta Teflón (Pack 5)", precio: 4.50, cat: "Fontanería" },
+            { id: 33, nombre: "Soplete a Gas Butano", precio: 28.00, cat: "Fontanería" },
+            { id: 34, nombre: "Cortatubos de Cobre", precio: 19.50, cat: "Fontanería" },
+            { id: 35, nombre: "Pegamento PVC 250ml", precio: 7.20, cat: "Fontanería" },
+            { id: 36, nombre: "Bomba de Agua 1/2 HP", precio: 120.00, cat: "Maquinaria" },
+            { id: 37, nombre: "Hidrolavadora 1400 PSI", precio: 140.00, cat: "Maquinaria" },
+            { id: 38, nombre: "Compresor de Aire 24L", precio: 195.00, cat: "Maquinaria" },
+            { id: 39, nombre: "Multímetro Digital", precio: 22.00, cat: "Electricidad" },
+            { id: 40, nombre: "Pasacable de Nylon 15m", precio: 12.50, cat: "Electricidad" },
+
+            // Fijación y Organización
+            { id: 41, nombre: "Caja de Herramientas 19\"", precio: 30.00, cat: "Varios" },
+            { id: 42, nombre: "Organizador de Tornillos", precio: 18.00, cat: "Varios" },
+            { id: 43, nombre: "Remachadora Manual", precio: 16.50, cat: "Manual" },
+            { id: 44, nombre: "Grapadora Industrial", precio: 25.00, cat: "Manual" },
+            { id: 45, nombre: "Lámpara LED de Trabajo", precio: 35.00, cat: "Electricidad" },
+            { id: 46, nombre: "Juego de Brocas Concreto", precio: 18.50, cat: "Accesorios" },
+            { id: 47, nombre: "Disco de Diamante 4.5\"", precio: 14.00, cat: "Accesorios" },
+            { id: 48, nombre: "Guantes de Cuero", precio: 8.50, cat: "Seguridad" },
+            { id: 49, nombre: "Gafas de Protección", precio: 6.00, cat: "Seguridad" },
+            { id: 50, nombre: "Candado de Acero 50mm", precio: 12.00, cat: "Seguridad" }
+        ];
+
+        const contenedor = document.getElementById('contenedor-productos');
+
+        productos.forEach(p => {
+            contenedor.innerHTML += `
+                <div class="card-3d product-card">
+                    <div class="product-image">
+                        <span class="category-tag">${p.cat}</span>
+                        <div class="img-placeholder">🛠️</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>${p.nombre}</h3>
+                        <p class="price">$${p.precio.toFixed(2)}</p>
+                        <div class="product-buttons">
+                            <button class="btn-cart" onclick="alert('Agregado al carrito')">🛒</button>
+                            <button class="btn-buy" onclick="alert('Procesando compra...')">COMPRAR</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>

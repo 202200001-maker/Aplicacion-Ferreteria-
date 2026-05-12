@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FERRETERÍA LOPEZ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container-nav">
+            <h1>FERRETERÍA</h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="Caracteristicas_Productos.html">Caracteristicas_Productos</a></li>
+                    <li><a href="Articulos_Entrada.html">Artículos-Existentes</a></li>
+                    <li><a href="Articulos_Venta.html">Articulos-Ventas</a></li>
+                    <li><a href="Precios.html">Precios-Articulos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <h1>BIENVENIDOS A NUESTRA FERRETERÍA</h1>
+            <p>Calidad y herramientas profesionales a tu alcance</p>
+        </section>
+
+        <div class="carousel-container">
+            <div class="carousel-slide" id="slider">
+                <img src="IMG/s1.avif" alt="Herramientas">
+                <img src="IMG/s2.avif" alt="Construcción">
+                <img src="IMG/s3.jpg" alt="Taller">
+                <img src="IMG/s4.jpg" alt="Materiales">
+            </div>
+
+            <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+
+        <section class="social-section">
+            <h2 class="section-title">CONTÁCTANOS</h2>
+            <div class="social-grid">
+                <a href="https://wa.me/tu-numero" target="_blank" class="card-3d social-card">
+                    <div class="card-content-social">
+                        <span>WhatsApp</span>
+                    </div>
+                </a>
+                <a href="https://facebook.com/tu-pagina" target="_blank" class="card-3d social-card">
+                    <div class="card-content-social">
+                        <span>Facebook</span>
+                    </div>
+                </a>
+                <a href="https://instagram.com/tu-perfil" target="_blank" class="card-3d social-card">
+                    <div class="card-content-social">
+                        <span>Instagram</span>
+                    </div>
+                </a>
+                <a href="mailto:correo@ejemplo.com" class="card-3d social-card">
+                    <div class="card-content-social">
+                        <span>Correo Electrónico</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let currentIndex = 0;
+        const slider = document.getElementById('slider');
+        const slides = document.querySelectorAll('.carousel-slide img');
+        const totalSlides = slides.length;
+
+        function moveSlide(direction) {
+            currentIndex += direction;
+
+            if (currentIndex >= totalSlides) {
+                currentIndex = 0;
+            } else if (currentIndex < 0) {
+                currentIndex = totalSlides - 1;
+            }
+
+            // El cálculo de -currentIndex * 100 funciona porque cada imagen mide 100% de ancho
+            const offset = -currentIndex * 100;
+            slider.style.transform = `translateX(${offset}%)`;
+        }
+
+        // Cambio automático cada 5 segundos
+        let autoSlide = setInterval(() => moveSlide(1), 5000);
+
+        // Reiniciar el temporizador cuando el usuario hace clic manualmente
+        function manualMove(n) {
+            clearInterval(autoSlide);
+            moveSlide(n);
+            autoSlide = setInterval(() => moveSlide(1), 5000);
+        }
+        
+        // Reemplazamos el onclick de los botones para usar la función que limpia el intervalo
+        document.querySelector('.prev').onclick = () => manualMove(-1);
+        document.querySelector('.next').onclick = () => manualMove(1);
+    </script>
+</body>
+</html>
